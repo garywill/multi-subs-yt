@@ -6,6 +6,10 @@ Nothing fancy, this is a browser addon that works! Watch with two subtitles on. 
 
 Display as many as you like! Different languages, translated, auto-generated ...
 
+> Well... It's true that youtube also contains videos of rumous, bias ... Those bad videos show in the recommendation list time and again. Even some videos spreaing rumous are so well-made that misleading lots of people ! And many misled people commenting help rumous to spread
+> 
+> ╮（!╯_╰）╭
+
 ## Features
 
 - Display as many subtitles as you like
