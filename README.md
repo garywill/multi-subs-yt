@@ -39,3 +39,7 @@ Display as many as you like! Different languages, translated, auto-generated ...
    Not a big deal. Still a little annoying right? Yes I feel the same. If you have idea, help solve it.
 2. Youtube's machine translation is not good enough. Welcome discussion if you know better API (open an issue on Github).
 
+## License
+
+If you want a license to use this code, feel free to talk about it (open an issue).
+
