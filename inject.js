@@ -58,25 +58,23 @@ function first_run() {
             */
         } else if (message.action == "remove_subs")
         {
-            var video = document.getElementsByTagName("video")[0];
-            Array.from( video.getElementsByTagName("track") ).forEach( function(ele) {
-                ele.track.mode = "hidden";
-                ele.parentNode.removeChild(ele);
-            });
-            
+            remove_subs();
         }
         
     });
     
-    body.addEventListener("yt-navigate-finish", function (event) {
-    if (first_load === false) {
-      remove_subtitle_download_button();
-      init();
-    }
-  });
+    document.addEventListener("yt-navigate-finish", function () {
+        remove_subs();
+    });
     
 }
-
+function remove_subs() {
+    var video = document.getElementsByTagName("video")[0];
+    Array.from( video.getElementsByTagName("track") ).forEach( function(ele) {
+        ele.track.mode = "hidden";
+        ele.parentNode.removeChild(ele);
+    });
+}
 async function send_ytplayer() 
 {
     
