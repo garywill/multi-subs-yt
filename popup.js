@@ -50,12 +50,19 @@ onrd.push(async function(){
         
         if (sender.tab.id == cur_tab.id) 
         {
-            document.getElementById("div_connecting_tip").style.display="none";
             
+            playerResponse = null;
             //console.log("tab id matches");
             //document.getElementById("div_page_title").textContent = message['title'];
             //ytplayer = JSON.parse(message['ytplayer_json']);
-            playerResponse = JSON.parse(message['playerResponse_json']);
+            try {
+                playerResponse = JSON.parse(message['playerResponse_json']);
+            }catch (err) {
+                show_refresh();
+            }
+            
+            document.getElementById("div_connecting_tip").style.display="none";
+            
             //console.log(ytplayer);
             //console.log(ytplayer.config);
             if (playerResponse === null || playerResponse === undefined )
@@ -87,8 +94,14 @@ function show_refresh() {
 function parse_ytplayer()
 {
     //const player_response = ytplayer.config.args.raw_player_response;
-    captionTracks = playerResponse.captions.playerCaptionsTracklistRenderer.captionTracks;
-    translationLanguages = playerResponse.captions.playerCaptionsTracklistRenderer.translationLanguages;
+    
+    if (playerResponse.captions) {
+        captionTracks = playerResponse.captions.playerCaptionsTracklistRenderer.captionTracks;
+        translationLanguages = playerResponse.captions.playerCaptionsTracklistRenderer.translationLanguages;
+    }else{
+        captionTracks = [];
+        translationLanguages = [];
+    }
     
     document.getElementById("div_page_title").textContent = playerResponse.videoDetails.title;
     
