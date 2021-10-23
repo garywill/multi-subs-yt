@@ -1,6 +1,6 @@
 /*
  * By garywill (https://garywill.github.io)
- * All Rights Reserved
+ * https://github.com/garywill/multi-subs-yt
  * 
  */
 
@@ -19,7 +19,8 @@ document.addEventListener('DOMContentLoaded', async (event) => {
 
 var cur_tab;
 
-var ytplayer;
+//var ytplayer;
+var playerResponse;
 var captionTracks;
 var translationLanguages;
 
@@ -53,25 +54,25 @@ onrd.push(async function(){
             
             //console.log("tab id matches");
             //document.getElementById("div_page_title").textContent = message['title'];
-            ytplayer = JSON.parse(message['ytplayer_json']);
+            //ytplayer = JSON.parse(message['ytplayer_json']);
+            playerResponse = JSON.parse(message['playerResponse_json']);
             //console.log(ytplayer);
             //console.log(ytplayer.config);
-            if (ytplayer === null || ytplayer === undefined || ytplayer.config === null || ytplayer.config === undefined)
+            if (playerResponse === null || playerResponse === undefined )
             {
                 show_refresh();
                 return;
             }
             
-            const player_response = ytplayer.config.args.raw_player_response;
+            //const player_response = ytplayer.config.args.raw_player_response;
             
-            var ytplayer_videoid = player_response.videoDetails.videoId;
+            var ytplayer_videoid = playerResponse.videoDetails.videoId;
             if ( typeof(ytplayer_videoid) === "string" && cur_tab.url.includes( ytplayer_videoid ) )
             {
                 //console.log("ytpleyr 与 url 一致");
             }else
                 show_refresh();
-            
-            
+
             parse_ytplayer();
         }
         
@@ -85,11 +86,11 @@ function show_refresh() {
 }
 function parse_ytplayer()
 {
-    const player_response = ytplayer.config.args.raw_player_response;
-    captionTracks = player_response.captions.playerCaptionsTracklistRenderer.captionTracks;
-    translationLanguages = player_response.captions.playerCaptionsTracklistRenderer.translationLanguages;
+    //const player_response = ytplayer.config.args.raw_player_response;
+    captionTracks = playerResponse.captions.playerCaptionsTracklistRenderer.captionTracks;
+    translationLanguages = playerResponse.captions.playerCaptionsTracklistRenderer.translationLanguages;
     
-    document.getElementById("div_page_title").textContent = player_response.videoDetails.title;
+    document.getElementById("div_page_title").textContent = playerResponse.videoDetails.title;
     
     //console.log(captionTracks);
     const selector_sub_lang = document.getElementById("selector-sub-lang");

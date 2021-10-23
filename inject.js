@@ -1,6 +1,6 @@
 /*
  * By garywill (https://garywill.github.io)
- * All Rights Reserved
+ * https://github.com/garywill/multi-subs-yt
  * 
  */
 
@@ -67,6 +67,14 @@ function first_run() {
         }
         
     });
+    
+    body.addEventListener("yt-navigate-finish", function (event) {
+    if (first_load === false) {
+      remove_subtitle_download_button();
+      init();
+    }
+  });
+    
 }
 
 async function send_ytplayer() 
@@ -76,13 +84,14 @@ async function send_ytplayer()
     try {
         get_ytplayer_to_body();
         
-        const ytplayer_json = document.body.getAttribute('data-ytplayer');
+        const playerResponse_json = document.body.getAttribute('data-playerResponse');
+        //console.log( playerResponse_json );
         
         browser.runtime.sendMessage({
             //tabid: window.tabid,
             title: document.title,
             href: window.location.href,
-            ytplayer_json: ytplayer_json,
+            playerResponse_json: playerResponse_json,
         });
     }catch(err) {}
     
@@ -94,7 +103,7 @@ var script_tag;
 function get_ytplayer_to_body()
 {
     var scriptContent =`
-        document.body.setAttribute("data-ytplayer", JSON.stringify(ytplayer));
+        document.body.setAttribute("data-playerResponse", JSON.stringify( document.getElementsByTagName("ytd-app")[0].data.playerResponse ));
     `;
     script_tag = document.createElement('script');
     //script_tag.id = 'tmpScript';
@@ -105,7 +114,7 @@ function get_ytplayer_to_body()
 function remove_page_change()
 {
     var scriptContent =`
-        document.body.removeAttribute("data-ytplayer");
+        document.body.removeAttribute("data-playerResponse");
     `;
     
     script_tag = script_tag || document.createElement('script');
