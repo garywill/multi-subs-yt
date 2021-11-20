@@ -1,5 +1,8 @@
 # Multiple Subtitles Youtube
 
+- [Firefox Addon](https://addons.mozilla.org/firefox/addon/multi-subsitles-youtube/)
+- [Microsoft Edge Addon](https://microsoftedge.microsoft.com/addons/detail/multi-subsitles-youtube/pkojclencdfmabjffabidjcmemkjiich)
+
 ## Features
 
 - 🎞️ Display as many subtitles as you like
@@ -45,3 +48,9 @@ Useful for leaning foreign languages.
 ## License
 
 If you want a license to use this code, feel free to talk about it (open an issue).
+
+## 友情链接
+
+感谢与以下项目间的互相启发及参考
+
+- [1c7/Youtube-Auto-Subtitle-Download: Youtube 字幕下载，Download Youtube Subtitles (Work best on Chrome + Tampermonkey) 支持中英双语字幕下载](https://github.com/1c7/Youtube-Auto-Subtitle-Download)
