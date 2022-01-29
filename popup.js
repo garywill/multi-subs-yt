@@ -32,6 +32,7 @@ onrd.push(async function(){
     //console.log (cur_tab.id, cur_tab.title );
     //document.getElementById("div_page_title").textContent = cur_tab.title;
     
+    browser.tabs.executeScript(cur_tab.id, {file: "browser-polyfill.min.js"});
     browser.tabs.executeScript(cur_tab.id, {
         code: `
             // window.tabid=${cur_tab.id};

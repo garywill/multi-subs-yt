@@ -24,25 +24,29 @@ function first_run() {
         {
             var url = message.url;
 
-            var video = document.getElementsByTagName("video")[0];
-            subt = document.createElement("track");
-
-            subt.default = true;
+            var videos = document.getElementsByTagName("video");
+            for (var i=0; i< videos.length; i++) {
+                var video = videos[i];
             
-            if (!message.kill_left)
-                subt.src = url;
-            else
-            {
-                var sub_data;
-                await fetch(url).then(response => response.text()).then(textString => {
-                    sub_data = textString;
-                });
-                sub_data = sub_data.replaceAll("align:start position:0%", "");
-                subt.src = "data:text/vtt," + encodeURIComponent(sub_data, true);
+                subt = document.createElement("track");
+
+                subt.default = true;
+                
+                if (!message.kill_left)
+                    subt.src = url;
+                else
+                {
+                    var sub_data;
+                    await fetch(url).then(response => response.text()).then(textString => {
+                        sub_data = textString;
+                    });
+                    sub_data = sub_data.replaceAll("align:start position:0%", "");
+                    subt.src = "data:text/vtt," + encodeURIComponent(sub_data, true);
+                }
+                //subt.srclang = "en";
+                video.appendChild(subt);
+                subt.track.mode = "showing";
             }
-            //subt.srclang = "en";
-            video.appendChild(subt);
-            subt.track.mode = "showing";
             
             /*
             var st = document.createElement("style");
@@ -69,11 +73,15 @@ function first_run() {
     
 }
 function remove_subs() {
-    var video = document.getElementsByTagName("video")[0];
-    Array.from( video.getElementsByTagName("track") ).forEach( function(ele) {
-        ele.track.mode = "hidden";
-        ele.parentNode.removeChild(ele);
-    });
+    var videos = document.getElementsByTagName("video");
+    for (var i=0; i< videos.length; i++) {
+        var video = videos[i];
+    
+        Array.from( video.getElementsByTagName("track") ).forEach( function(ele) {
+            ele.track.mode = "hidden";
+            ele.parentNode.removeChild(ele);
+        });
+    }
 }
 async function send_ytplayer() 
 {

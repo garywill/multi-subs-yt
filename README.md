@@ -11,7 +11,6 @@
 - 🎞️ Display as many subtitles as you like
 - 🎞️ Support auto-generated subtitle also
 - 🎞️ Support machine-translated subtitle also (including translating from auto-generated)
-  
   > You should know machine-translate is **not** 100% correct. It could contain lots of mistakes.
   > 
   > Youtube's machine translation is not good enough. Welcome discussion if you know better open API (open an issue on Github).
@@ -34,9 +33,7 @@ Useful for leaning foreign languages.
 
 > 💬 Well... It's true that youtube also contains videos of rumours, bias ... Those bad videos show in the recommendation list time and again. Even some videos spreaing rumours are so well-made that misleading lots of people ! And many misled people commenting help rumours to spread
 > 
-> 
 > ╮（!╯_╰）╭
-> 
 > 
 > 💬 Even Discovery broadcasts rumours programs
 

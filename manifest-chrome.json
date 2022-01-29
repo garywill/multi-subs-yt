@@ -1,0 +1,30 @@
+{
+    "name": "Multi Subsitles Youtube",
+    "description": "Display as many subtitles as you like. Different languages, translated, auto-generated. NO dependency on third-party server",
+    "manifest_version": 2,
+    "version": "0.9.6",
+    "homepage_url": "https://github.com/garywill/multi-subs-yt",
+    "author": {
+        "name": "Garywill",
+        "url": "https://garywill.github.io"
+    },
+    "permissions": [
+        "activeTab",
+        "storage"
+    ],
+    "browser_action": {
+        "default_title": "Multi Subsitles Youtube",
+        "default_popup": "popup.html",
+        "default_icon":  "icon.png"
+    },
+    "background": {
+        "scripts": [
+            "background.js"
+        ],
+        "persistent": true
+    },
+    "icons": {
+        "128": "icon.png"
+    }
+
+} 

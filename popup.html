@@ -10,9 +10,17 @@
     <head>
         <meta charset="utf-8">
         <title></title>
+        <script type="module" src="browser-polyfill.min.js"></script>
         <script type="text/javascript" src="stor.js"></script>
         <script type="text/javascript" src="popup.js"></script>
         <style>
+            /* Chrome only */
+            body { 
+                width: 700px; 
+            }
+            /* --- */
+            
+            
             button {
                 padding: 0;
                 margin: 0;
