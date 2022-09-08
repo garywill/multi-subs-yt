@@ -39,8 +39,26 @@ function first_run() {
             
                 subt = document.createElement("track");
 
+                const loading_tip = `WEBVTT
+
+STYLE
+::cue {
+  color: #197aa7; !important
+  font-size: 50%;
+}
+
+00:00:00.100 --> 1999:59:59.080 align:start position:0% 
+Fetching one subtitle..`;
+                
+                
                 subt.default = true;
+                
+                subt.src = "data:text/vtt," + encodeURIComponent(loading_tip, true);
             
+                //subt.srclang = "en";
+                video.appendChild(subt);
+                subt.track.mode = "showing";            
+                
 
                 var sub_data;
                 var succ_fetch_sub = false;
@@ -87,7 +105,6 @@ Failed to fetch one subtitle`
                 subt.src = "data:text/vtt," + encodeURIComponent(sub_data, true);
             
                 //subt.srclang = "en";
-                video.appendChild(subt);
                 subt.track.mode = "showing";
             }
             
