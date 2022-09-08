@@ -31,18 +31,52 @@ function first_run() {
                 subt = document.createElement("track");
 
                 subt.default = true;
+            
+
+                var sub_data;
+                var succ_fetch_sub = false;
                 
-                if (!message.kill_left)
-                    subt.src = url;
-                else
-                {
-                    var sub_data;
-                    await fetch(url).then(response => response.text()).then(textString => {
-                        sub_data = textString;
+                try {
+                    await fetch(url).then(response => {
+                        if (response.ok)
+                        {
+                            succ_fetch_sub = true;
+                            console.log("Fetching subtitle file responsed ok");
+                        }
+                        return response.text();
+                    }).then(textString => {
+                        if (succ_fetch_sub)
+                            sub_data = textString;
+                        else 
+                        {
+                            fetching_sub_failed();
+                        }
                     });
-                    sub_data = sub_data.replaceAll("align:start position:0%", "");
-                    subt.src = "data:text/vtt," + encodeURIComponent(sub_data, true);
                 }
+                catch(err) 
+                {
+                        fetching_sub_failed();
+                }
+                function fetching_sub_failed() {
+                    console.warn("Failed to fetch subtitle");
+                    sub_data = `WEBVTT
+
+
+STYLE
+::cue {
+  color: #b8ba35; !important
+  font-size: 50%;
+}
+
+00:00:00.100 --> 1999:59:59.080 align:start position:0% 
+Failed to fetch one subtitle`
+                }
+                
+                if ( succ_fetch_sub && message.kill_left  )
+                    sub_data = sub_data.replaceAll("align:start position:0%", "");
+                
+                subt.src = "data:text/vtt," + encodeURIComponent(sub_data, true);
+            
                 //subt.srclang = "en";
                 video.appendChild(subt);
                 subt.track.mode = "showing";
