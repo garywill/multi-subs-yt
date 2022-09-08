@@ -18,7 +18,7 @@ if ( ! window.has_executed )
 }
 
 function first_run() {
-    browser.runtime.onMessage.addListener( async function(message, sender) { 
+    chrome.runtime.onMessage.addListener( async function(message, sender) { 
         //console.log(message, sender);
         if ( message.action == "display_sub" )
         {
@@ -127,7 +127,7 @@ async function send_ytplayer()
         const playerResponse_json = document.body.getAttribute('data-playerResponse');
         //console.log( playerResponse_json );
         
-        browser.runtime.sendMessage({
+        chrome.runtime.sendMessage({
             //tabid: window.tabid,
             title: document.title,
             href: window.location.href,
