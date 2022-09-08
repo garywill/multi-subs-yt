@@ -21,6 +21,7 @@
             "128": "icon.png"
         }
     },
+    "web_accessible_resources": [ "inline-get.js" , "inline-remove.js"],  
     "background": {
         "scripts": [
             "background.js"

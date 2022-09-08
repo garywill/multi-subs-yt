@@ -1,3 +1,11 @@
+var isFirefox = false;
+var isChrome = false;
+isFirefox = chrome.runtime.getURL('').startsWith('moz-extension://');
+isChrome = chrome.runtime.getURL('').startsWith('chrome-extension://');
+
+if (isFirefox)
+    window.chrome = window.browser;
+
 async function getStor(key) {
     
     if ( ! key)

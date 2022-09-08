@@ -4,24 +4,33 @@
  * 
  */
 
-send_ytplayer();
+console.debug("============inject.js=================");
+
  
-//console.log(window.tabid);
+//console.debug(window.tabid);
 if ( ! window.has_executed )
 {
+    console.debug("calling first_run()");
     first_run();
-    
+    console.debug("finished first_run()");
     window.has_executed = true;
-    //console.log("first inject");
+    //console.debug("first inject");
     
     
 }
 
+send_ytplayer();
+
+//====================================================
+
 function first_run() {
     chrome.runtime.onMessage.addListener( async function(message, sender) { 
-        //console.log(message, sender);
+        console.debug("content script received message");
+        //console.debug(message, sender);
         if ( message.action == "display_sub" )
         {
+            console.debug("content script received message : display_sub");
+            
             var url = message.url;
 
             var videos = document.getElementsByTagName("video");
@@ -41,7 +50,7 @@ function first_run() {
                         if (response.ok)
                         {
                             succ_fetch_sub = true;
-                            console.log("Fetching subtitle file responsed ok");
+                            console.debug("Fetching subtitle file responsed ok");
                         }
                         return response.text();
                     }).then(textString => {
@@ -96,12 +105,14 @@ Failed to fetch one subtitle`
             */
         } else if (message.action == "remove_subs")
         {
+            console.debug("content script received message : remove_subs");
             remove_subs();
         }
         
     });
     
     document.addEventListener("yt-navigate-finish", function () {
+        console.debug("content script: 'yt-navigate-finish' event");
         remove_subs();
     });
     
@@ -117,58 +128,85 @@ function remove_subs() {
         });
     }
 }
+
 async function send_ytplayer() 
 {
-    
-    //console.log(document.title);
+    console.debug("send_ytplayer()");
+    //console.debug(document.title);
     try {
         get_ytplayer_to_body();
+        await sleep(100);
+        console.debug("finished get_ytplayer_to_body()")
         
-        const playerResponse_json = document.body.getAttribute('data-playerResponse');
-        //console.log( playerResponse_json );
+        var playerResponse_json =  document.body.getAttribute('data-playerResponse')  ;
+        console.debug("finished reading body attr")
+        //console.debug( playerResponse_json );
         
+        console.debug(document.title, window.location.href);
+        console.debug(playerResponse_json.length);
         chrome.runtime.sendMessage({
             //tabid: window.tabid,
             title: document.title,
             href: window.location.href,
             playerResponse_json: playerResponse_json,
         });
-    }catch(err) {}
+        console.debug("finished runtime.sendMessage()");
+    }catch(err) {
+        console.debug("!!!! ERROE !!! error when sending ytplayer");
+        console.warn(err);
+    }
     
+    
+    console.debug("wait some secs then remove body attr");
+    await sleep (2000);
+    console.debug("now remove body attr");
     remove_page_change();
 
 }
 
-var script_tag;
+// var script_tag;
 function get_ytplayer_to_body()
 {
-    var scriptContent =`
-        document.body.setAttribute("data-playerResponse", JSON.stringify( document.getElementsByTagName("ytd-app")[0].data.playerResponse ));
-    `;
+    execJsFileInWebScope('inline-get.js');
+}
+
+function execJsFileInWebScope(JsFileName)
+{
+    var script_tag = document.createElement('script');
+    script_tag.src = chrome.runtime.getURL(JsFileName);
+    script_tag.onload = function() {
+        setTimeout( function() {
+                script_tag.remove();
+            }, 
+            3000
+        );
+    };
+    (document.head || document.documentElement).appendChild(script_tag);
+    
+/*    
+    var scriptContent = `document.body.setAttribute("data-playerResponse", JSON.stringify( document.getElementsByTagName("ytd-app")[0].data.playerResponse ));`;
     script_tag = document.createElement('script');
     //script_tag.id = 'tmpScript';
     script_tag.appendChild(document.createTextNode(scriptContent));
     
-    (document.body || document.head || document.documentElement).appendChild(script_tag);
+    (document.body || document.head || document.documentElement).appendChild(script_tag); */
 }
 function remove_page_change()
 {
-    var scriptContent =`
-        document.body.removeAttribute("data-playerResponse");
-    `;
-    
-    script_tag = script_tag || document.createElement('script');
-    
-    script_tag.innerHTML="";
-    script_tag.appendChild(document.createTextNode(scriptContent));
-    
-    script_tag.parentNode.removeChild(script_tag);
-    
+    try {
+        execJsFileInWebScope("inline-remove.js");
+    }
+    catch(err)
+    {
+        console.error(err);
+    }
 }
 
 //------------------------------------------------
 
 
-
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
  
 

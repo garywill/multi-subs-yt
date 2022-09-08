@@ -10,16 +10,21 @@
     },
     "permissions": [
         "activeTab",
+        "scripting", 
         "storage"
     ],
-    "browser_action": {
+    "action": {
         "default_title": "Multi Subsitles Youtube",
         "default_popup": "popup.html",
         "default_icon":  "icon.png"
     },
-
     "icons": {
         "128": "icon.png"
-    }
+    },
+    "web_accessible_resources": [{
+        "resources": ["inline-get.js", "inline-remove.js"],
+        "matches": ["*://www.youtube.com/*"]
+    }]
+
 
 } 

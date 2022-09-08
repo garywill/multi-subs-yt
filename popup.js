@@ -4,6 +4,8 @@
  * 
  */
 
+var mv = chrome.runtime.getManifest().manifest_version;
+
 var onrd = new Array(); //on document ready
 document.addEventListener('DOMContentLoaded', async (event) => {
 
@@ -29,31 +31,41 @@ onrd.push(async function(){
         currentWindow: true, active: true
     }) ) [0];
 
-    //console.log (cur_tab.id, cur_tab.title );
+    //console.debug (cur_tab.id, cur_tab.title );
     //document.getElementById("div_page_title").textContent = cur_tab.title;
     
 //     chrome.tabs.executeScript(cur_tab.id, {file: "browser-polyfill.min.js"});
-    chrome.tabs.executeScript(cur_tab.id, {
-        code: `
-            // window.tabid=${cur_tab.id};
-        `,
-        runAt: "document_start"
-    }).then(function() {
+//     chrome.tabs.executeScript(cur_tab.id, {
+//         code: `
+//             // window.tabid=${cur_tab.id};
+//         `,
+//         runAt: "document_start"
+//     }).then(function() {
+    if (mv == 2)
+    {
         chrome.tabs.executeScript(cur_tab.id, {
             file: 'inject.js'
         }) ;
-    });
+    }
+    else if (mv == 3)
+    {
+        chrome.scripting.executeScript({
+            target: {tabId: cur_tab.id},
+            files: ['inject.js'], 
+        });
+    }
+//     });
     
     chrome.runtime.onMessage.addListener(async function(message, sender) { 
         // 
-        // console.log("popup receive message", message, sender);
-        // console.log(message);
+        // console.debug("popup receive message", message, sender);
+        // console.debug(message);
         
         if (sender.tab.id == cur_tab.id) 
         {
             
             playerResponse = null;
-            //console.log("tab id matches");
+            //console.debug("tab id matches");
             //document.getElementById("div_page_title").textContent = message['title'];
             //ytplayer = JSON.parse(message['ytplayer_json']);
             try {
@@ -64,8 +76,8 @@ onrd.push(async function(){
             
             document.getElementById("div_connecting_tip").style.display="none";
             
-            //console.log(ytplayer);
-            //console.log(ytplayer.config);
+            //console.debug(ytplayer);
+            //console.debug(ytplayer.config);
             if (playerResponse === null || playerResponse === undefined )
             {
                 show_refresh();
@@ -77,7 +89,7 @@ onrd.push(async function(){
             var ytplayer_videoid = playerResponse.videoDetails.videoId;
             if ( typeof(ytplayer_videoid) === "string" && cur_tab.url.includes( ytplayer_videoid ) )
             {
-                //console.log("ytpleyr 与 url 一致");
+                //console.debug("ytpleyr 与 url 一致");
             }else
                 show_refresh();
 
@@ -106,7 +118,7 @@ function parse_ytplayer()
     
     document.getElementById("div_page_title").textContent = playerResponse.videoDetails.title;
     
-    //console.log(captionTracks);
+    //console.debug(captionTracks);
     const selector_sub_lang = document.getElementById("selector-sub-lang");
     selector_sub_lang.innerHTML = "";
     captionTracks.forEach(async function (c, i) {
@@ -126,7 +138,7 @@ function parse_ytplayer()
             selector_sub_lang.value = i;
     });
     
-    //console.log(translationLanguages);
+    //console.debug(translationLanguages);
     const selector_trans_lang = document.getElementById("selector-trans-lang");
     translationLanguages.forEach(async function (c, i) {
         var option = document.createElement("option");
@@ -158,7 +170,7 @@ onrd.push( function() {
         
         var orig_vssid = captionTracks[selector_sub_lang.value].vssId;
         setStor("orig_sub_lang", orig_vssid);
-        //console.log(getStor('orig_sub_lang'));
+        //console.debug(getStor('orig_sub_lang'));
         
         if ( cbox_trans.checked) {
             var tran_lang = translationLanguages[selector_trans_lang.value].languageCode;
