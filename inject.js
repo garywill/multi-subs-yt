@@ -100,7 +100,9 @@ Failed to fetch one subtitle`
                 }
                 
                 if ( succ_fetch_sub && message.kill_left  )
-                    sub_data = sub_data.replaceAll("align:start position:0%", "");
+                    sub_data = sub_data.replaceAll("align:start position:0%", "")
+                                        .replaceAll("align:start position:100%", "")
+                        ;
                 
                 subt.src = "data:text/vtt," + encodeURIComponent(sub_data, true);
             
