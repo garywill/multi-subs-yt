@@ -4,7 +4,6 @@
  * 
  */
 
-var mv = chrome.runtime.getManifest().manifest_version;
 
 var onrd = new Array(); //on document ready
 document.addEventListener('DOMContentLoaded', async (event) => {
@@ -32,20 +31,12 @@ onrd.push(async function(){
     }) ) [0];
 
 
-    if (mv == 2)
-    {
-        chrome.tabs.executeScript(cur_tab.id, {
-            file: 'inject.js'
-        }) ;
-    }
-    else if (mv == 3)
-    {
-        chrome.scripting.executeScript({
-            target: {tabId: cur_tab.id},
-            files: ['inject.js'], 
-        });
-    }
-//     });
+
+
+    chrome.scripting.executeScript({
+        target: {tabId: cur_tab.id},
+        files: ['inject.js'],
+    });
     
     chrome.runtime.onMessage.addListener(async function(message, sender) { 
         // 
