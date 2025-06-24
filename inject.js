@@ -73,7 +73,18 @@ Fetching one subtitle..`;
                         return response.text();
                     }).then(textString => {
                         if (succ_fetch_sub)
-                            sub_data = textString;
+                        {
+                            if ( textString.trim() )
+                            {
+                                sub_data = textString;
+                                console.log("subtitle file length:", sub_data.length);
+                            }
+                            else
+                            {
+                                console.error("receive empty subtitle file");
+                                fetching_sub_failed();
+                            }
+                        }
                         else 
                         {
                             fetching_sub_failed();
