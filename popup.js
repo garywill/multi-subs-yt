@@ -234,6 +234,8 @@ function get_subtitle_url(){
     
     var url = captionTracks[selector_sub_lang.value].baseUrl + "&fmt=vtt";
     
+    url +=`&c=WEB&pot=${pot}`;
+
     if (cbox_trans.checked)
     {
         var trans_to_lang_code = translationLanguages[selector_trans_lang.value].languageCode;
