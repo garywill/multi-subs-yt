@@ -1,8 +1,8 @@
 {
     "name": "Multi Subsitles Youtube",
     "description": "Display as many subtitles as you like. Different languages, translated, auto-generated. NO dependency on third-party server",
-    "manifest_version": 2,
-    "version": "0.9.32",
+    "manifest_version": 3,
+    "version": "0.9.40",
     "homepage_url": "https://garywill.github.io",
     "developer": {
         "name": "Garywill",
@@ -10,26 +10,31 @@
     },
     "permissions": [
         "activeTab",
-        "storage"
+        "scripting",
+        "storage",
+        "webRequest"
+    ],
+    "host_permissions": [
+        "*://*.youtube.com/*"
     ],
     "page_action": {
         "default_title": "Multi Subsitles Youtube",
-        "browser_style": true,
         "default_popup": "popup.html",
         "show_matches": [ "*://www.youtube.com/watch*" ],
         "default_icon": {
             "128": "icon.png"
         }
     },
-    "web_accessible_resources": [ "inline-get.js" , "inline-remove.js"],  
     "background": {
-        "scripts": [
-            "background.js"
-        ]
+        "page": "background.html"
     },
     "icons": {
         "128": "icon.png"
     },
+    "web_accessible_resources": [{
+        "resources": ["inline-get.js", "inline-remove.js"],
+        "matches": ["*://www.youtube.com/*"]
+    }],
     "browser_specific_settings": {
         "gecko": {
             "id": "{e624fdbf-02a8-4f25-90d8-47d23347cf9b}"
