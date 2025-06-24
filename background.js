@@ -14,3 +14,18 @@ chrome.webRequest.onBeforeRequest.addListener(
     { urls: ["*://www.youtube.com/api/timedtext*"] },
     []
 );
+
+chrome.runtime.onMessage.addListener(async function(request, sender, sendResponse) {
+    if (request.action === "get-pot") {
+        console.log('background receive "get-pot"');
+        const cc_pot =  (await chrome.storage.session.get() )['cc_pot'] || "" ;
+
+        console.log("send response cc_pot", cc_pot);
+
+        sendResponse(cc_pot);
+
+        return cc_pot;
+    }
+});
+
+
