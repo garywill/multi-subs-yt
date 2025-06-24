@@ -15,16 +15,20 @@ chrome.webRequest.onBeforeRequest.addListener(
     []
 );
 
-chrome.runtime.onMessage.addListener(async function(request, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.action === "get-pot") {
         console.log('background receive "get-pot"');
-        const cc_pot =  (await chrome.storage.session.get() )['cc_pot'] || "" ;
 
-        console.log("send response cc_pot", cc_pot);
+        (async () => {
+            const cc_pot =  (await chrome.storage.session.get() )['cc_pot'] || "" ;
 
-        sendResponse(cc_pot);
+            console.log("send response cc_pot:", cc_pot);
 
-        return cc_pot;
+            sendResponse(cc_pot);
+
+        })();
+
+        return true;
     }
 });
 
