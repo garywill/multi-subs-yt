@@ -31,16 +31,7 @@ onrd.push(async function(){
         currentWindow: true, active: true
     }) ) [0];
 
-    //console.debug (cur_tab.id, cur_tab.title );
-    //document.getElementById("div_page_title").textContent = cur_tab.title;
-    
-//     chrome.tabs.executeScript(cur_tab.id, {file: "browser-polyfill.min.js"});
-//     chrome.tabs.executeScript(cur_tab.id, {
-//         code: `
-//             // window.tabid=${cur_tab.id};
-//         `,
-//         runAt: "document_start"
-//     }).then(function() {
+
     if (mv == 2)
     {
         chrome.tabs.executeScript(cur_tab.id, {
