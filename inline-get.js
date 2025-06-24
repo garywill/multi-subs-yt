@@ -11,6 +11,8 @@ document.body.setAttribute("data-playerResponse", JSON.stringify(
     plyRes
 ));
 
+// TODO delete plyRes
+
 console.debug("typeof body's attr is", 
     typeof ( document.body.getAttribute('data-playerResponse') )
 );
