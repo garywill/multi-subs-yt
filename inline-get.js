@@ -1,6 +1,6 @@
 console.debug("inline-get.js");
 
-var plyRes = document.getElementsByTagName("ytd-app")[0].data.playerResponse 
+var plyRes = document.getElementsByTagName("ytd-app")[0].data.playerResponse ;
 
 console.debug("got ytd-app[0] playerResponse");
 

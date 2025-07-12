@@ -1,4 +1,4 @@
-# Multiple Subtitles Youtube
+# Multiple Subtitles for Youtube
 
 - [Firefox Addon](https://addons.mozilla.org/firefox/addon/multi-subsitles-youtube/)
 - [Chrome Addon](https://chrome.google.com/webstore/detail/multi-subsitles-youtube/iofkfippgombbpmcndmjdkdmmmchpill)
@@ -31,15 +31,10 @@ Nothing fancy, this is a browser addon that works! **Watch with two subtitles on
 
 Useful for leaning foreign languages.
 
-> 💬 Well... It's true that youtube also contains videos of rumours, bias ... Those bad videos show in the recommendation list time and again. Even some videos spreaing rumours are so well-made that misleading lots of people ! And many misled people commenting help rumours to spread
-> 
-> ╮（!╯_╰）╭
-> 
-> 💬 Even Discovery broadcasts rumours programs
 
 ## Testing videos
 
-1. [Video with only auto-generated English CC](https://www.youtube.com/watch?v=hn5BkviAyvQ)
+1. [Video with only auto-generated English CC](https://www.youtube.com/watch?v=HRfbQJ6FdF0)
 2. [Video with non-English and auto-generated English CCs](https://www.youtube.com/watch?v=M0k5AfBnIQs)
 3. [Video with CCs in different languages without auto-generated English](https://www.youtube.com/watch?v=otjvUz7qKXc)
 
