@@ -107,7 +107,7 @@ STYLE
 }
 
 00:00:00.100 --> 1999:59:59.080 align:start position:0% 
-Failed to fetch one subtitle`
+Failed to fetch one subtitle. Toggle CC twice and try again plase.`
                 }
                 
                 if ( succ_fetch_sub && message.kill_left  )
