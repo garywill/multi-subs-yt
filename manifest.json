@@ -2,7 +2,7 @@
     "name": "Multi Subsitles Youtube",
     "description": "Display as many subtitles as you like. Different languages, translated, auto-generated. NO dependency on third-party server",
     "manifest_version": 3,
-    "version": "0.9.43",
+    "version": "0.9.44",
     "homepage_url": "https://garywill.github.io",
     "developer": {
         "name": "Garywill",
