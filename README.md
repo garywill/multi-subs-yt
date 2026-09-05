@@ -1,7 +1,7 @@
 # Multiple Subtitles for Youtube
 
 - [Firefox Addon](https://addons.mozilla.org/firefox/addon/multi-subsitles-youtube/)
-- [Chrome Addon](https://chrome.google.com/webstore/detail/multi-subsitles-youtube/iofkfippgombbpmcndmjdkdmmmchpill)
+- [Chrome Addon](https://chrome.google.com/webstore/detail/multi-subsitles-youtube/iofkfippgombbpmcndmjdkdmmmchpill) (my Google account currently suspended for unknown reason)
 - [Microsoft Edge Addon](https://microsoftedge.microsoft.com/addons/detail/multi-subsitles-youtube/pkojclencdfmabjffabidjcmemkjiich)
 
 > *Youtube* is a trademark of Google LLC. We're not employee or a part of them.
